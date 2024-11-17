@@ -1,18 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM CONTENT LOADED');
 
-// look back at the <readme.md> file for some hints //
-// working API key //
-const giphyApiKey = "MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym";
-const gifButton = document.getElementById("generate-button");
-const displayDiv = document.getElementById("display-div");
-const clearButton = document.getElementById("clear-all");
-const searchInput = document.getElementById("search");
+    // look back at the <readme.md> file for some hints //
+    // working API key //
+    const giphyApiKey = "MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym";
+    const gifButton = document.getElementById("generate-button");
+    const displayDiv = document.getElementById("display-div");
+    const clearButton = document.getElementById("clear-all");
+    const searchInput = document.getElementById("search");
 
-// searchInput.addEventListener("oninput", function () {
-    
-//     console.log(searchTerm);
-// })
+    // searchInput.addEventListener("oninput", function () {
+
+    //     console.log(searchTerm);
+    // })
+
+    function generateRandomNumber(multiplier {
+        return Math.floor(Math.random() * multipler);
+
+});
+
 
 gifButton.addEventListener("click", function (e) {
     e.preventDefault();
@@ -22,17 +28,23 @@ gifButton.addEventListener("click", function (e) {
 });
 
 async function giphyRequest(searchTerm) {
-    const response = await axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${searchTerm}&limit=10`)
+    const response = await axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${searchTerm}&limit=5`)
     console.log(response.data);
-    
+    const arrLength = response.data.data.length;
+    const random = generateRandomNumber(arrLength);
+
     displayDiv.innerHTML = "";
     let h4 = document.createElement("h4");
-    h4.innerHTML = response.data.data[0].title;
+    h4.innerHTML = response.data.data[random].title;
     displayDiv.appendChild(h4);
 
     const image = document.createElement("img");
-    image.src = response.data.data[0].images.downsized.url;
-    image.alt = response.data.data[0].alt_text;
+
+
+
+
+    image.src = response.data.data[random].images.downsized.url;
+    image.alt = response.data.data[random].alt_text;
     image.id = "gif";
     displayDiv.appendChild(image);
 };
@@ -63,3 +75,6 @@ clearButton.addEventListener("click", function (e) {
 //   }
 
 });
+
+
+//add next button to show the next set of GIFs?
