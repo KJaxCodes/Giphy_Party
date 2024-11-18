@@ -1,1 +1,31 @@
 /* Your Styles Here */
+body {
+    background-color: #C3C3C3;
+}
+
+input {
+    padding: 5px;
+    margin: 10px 0;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+input:hover {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.94);
+}
+
+#generate-button {
+    background-color: teal;
+}
+
+button {
+    padding: 5px;
+    margin: 10px 0;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: pink;
+}
+
+button:hover {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.94);
+}

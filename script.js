@@ -30,33 +30,42 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     async function giphyRequest(searchTerm) {
-        console.log("Offset: " + offset);
-        const response = await axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${searchTerm}&limit=50`)
-        console.log(response.data);
-        // const arrLength = response.data.data.length;
-        // const random = generateRandomNumber(arrLength);
-        // we run the random number generator five times;
-        // 5, 24, 31, 11, 3 
-        //Push all of the results to an array = [5, 24, 31, 11, 3]
-        //loop over that array
-        // displayDiv.innerHTML = ""; commenting out so that the gif isn't cleared when the button is clicked
+        try {
+            console.log("Offset: " + offset);
+            const response = await axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${giphyApiKey}&q=${searchTerm}&limit=10`)
+            console.log(response.data);
+            // const arrLength = response.data.data.length;
+            // const random = generateRandomNumber(arrLength);
+            // we run the random number generator five times;
+            // 5, 24, 31, 11, 3 
+            //Push all of the results to an array = [5, 24, 31, 11, 3]
+            //loop over that array
+            // displayDiv.innerHTML = ""; commenting out so that the gif isn't cleared when the button is clicked
 
-        let newDiv = document.createElement("div");
-        displayDiv.appendChild(newDiv);
-        console.log(newDiv);
+            let newDiv = document.createElement("div");
+            displayDiv.appendChild(newDiv);
+            console.log(newDiv);
 
-        let h4 = document.createElement("h4");
+            let h4 = document.createElement("h4");
 
-        h4.innerHTML = response.data.data[offset].title;
-        newDiv.appendChild(h4);
+            h4.innerHTML = response.data.data[offset].title;
+            newDiv.appendChild(h4);
 
-        let image = document.createElement("img");
+            let image = document.createElement("img");
 
-        image.src = response.data.data[offset].images.downsized.url;
-        image.alt = response.data.data[offset].alt_text;
-        image.id = "gif";
-        newDiv.appendChild(image);
-        offset += 1;
+            image.src = response.data.data[offset].images.downsized.url;
+            image.alt = response.data.data[offset].alt_text;
+            image.id = "gif";
+            newDiv.appendChild(image);
+            offset += 1;
+        } catch (error) {
+            console.log("An error occurred");
+            console.log(error);
+            displayDiv.innerHTML = "";
+            let h4 = document.createElement("h4");
+            h4.innerHTML = "Error";
+            displayDiv.appendChild(h4);
+        };
     };
 
     clearButton.addEventListener("click", function (e) {
@@ -65,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(displayDiv);
         displayDiv.innerHTML = "";
         searchInput.value = "";
+        offset = 0;
         //clear the input/search term?
     });
 
